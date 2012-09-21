@@ -46,6 +46,11 @@
     width: 200px;
     height: 205px;
   }
+  #twitter-button {
+    float:right;
+    //position:relative;
+    //right:50px;
+  }
 
   div.quote {
     text-align: center;
@@ -168,12 +173,14 @@
     ],
 
     events: {
-      "click #balloon": "saySomething"
+      "click #balloon": "saySomething",
+      "click #twitter-button": "preventBubbling",
     },
 
     elements: {
       "#balloon": "balloon",
-      "#balloon p": "quote"
+      "#balloon p": "quote",
+      "#twitter-button": "twitter_button",
     },
 
     saySomething: function() {
@@ -186,6 +193,8 @@
       var adjective2 = this.pickRandom(this.adjectives);
       var sentence = this.selectArticoloDet(adjective1[subject.genere], subject.genere) + " " + adjective1[subject.genere] + " " + subject.nome + " " + verb + " " + this.selectArticoloInd(adjective2[obj.genere], obj.genere) + " " + adjective2[obj.genere] + " " + obj.nome;
       sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1) + ".";
+      var link = "https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=" + sentence;
+      this.twitter_button.attr("href", link);
       this.quote.text(sentence);
       this.balloon.show(500)
     },
@@ -222,6 +231,10 @@
 
     pickRandom: function(list) {
       return list[Math.floor(Math.random()*list.length)];
+    },
+
+    preventBubbling: function(event) {
+      event.stopPropagation();
     }
   });
 
@@ -263,6 +276,7 @@
 
       <blockquote id="balloon" class="example-obtuse">
         <p>Try me! Click here!</p>
+        <a href="https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=a" id="twitter-button" target="Tweet!!"><img src="img/twitter.png" width="16px"/>Tweet this!</a>
       </blockquote>
   </div> 
 </body>
