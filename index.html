@@ -27,7 +27,7 @@
   }
   #face {
     background-image: url("img/alberto_big.png");
-    width: 830px;
+    width: 828px;
     height: 497px;
     float: right;
   }
@@ -46,10 +46,10 @@
     width: 200px;
     height: 205px;
   }
-  #twitter-button {
+  
+  .action-button {
     float:right;
-    //position:relative;
-    //right:50px;
+    margin-left: 3px;
   }
 
   div.quote {
@@ -133,7 +133,9 @@
 <script id="quoteTemplate" type="text/x-jquery-tmpl">
     {{if body}}
     <p>${body}</p>
-    <a href="https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=${body}" id="twitter-button" target="Tweet!!"><img alt="Twitter" title="Twitter" src="img/twitter.png" width="16px"/></a>
+    <a href="https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=${encodeURI(body)}" id="twitter-button" class="action-button" target="Tweet!!"><img alt="Twitter" title="Twitter" src="img/twitter.png" width="16px"/></a>
+
+    <a href="http://translate.google.it/#it/en/${encodeURI(body)}" id="translate-button" class="action-button" target="Translate!!"><img alt="Translate" title="Translate" src="img/translate.png" width="16px"/></a>
     {{else}}
     <p>Try me! Click here!</p>
     {{/if}}
@@ -198,13 +200,12 @@
 
     events: {
       "click #balloon": "saySomething",
-      "click #twitter-button": "preventBubbling",
+      "click .action-button": "preventBubbling",
     },
 
     elements: {
       "#balloon": "balloon",
       "#balloon p": "quote",
-      "#twitter-button": "twitter_button",
     },
 
     saySomething: function() {
@@ -276,9 +277,6 @@
 </head>
 <body>
   <div class="container">
-    <div class="span-24">
-      <div id="header" class=""></div>
-    </div> 
     <div class="span-1">
       <div id="logo" class="push-2"></div>
     </div> 
