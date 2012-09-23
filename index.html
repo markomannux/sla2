@@ -20,6 +20,14 @@
     background: #800000;
     height: 10px;
   }
+
+  .footer {
+    background: #800000;
+    color: white;
+    text-align: center;
+    padding-top: 5px;
+  }
+
   #logo {
     background-image: url("img/logo.png");
     width: 341px;
@@ -140,11 +148,22 @@
     <p>Try me! Click here!</p>
     {{/if}}
 </script>
+<script id="versionTemplate" type="text/x-jquery-tmpl">
+  {{if version}}
+  <p>version ${version}</p>
+  {{else}}
+  <p>version n/a</p>
+  {{/if}}
+
+
+</script>
 
 <script type="text/javascript">
 
   var Sentence = Spine.Model.sub();
   Sentence.configure("Sentence", "body");
+  var Metadata= Spine.Model.sub();
+  Metadata.configure("Metadata", "version");
 
   var KonamiCodeController = Spine.Controller.sub({
     init: function() {
@@ -170,8 +189,12 @@
   var SlaApp = Spine.Controller.sub({
     init: function() {
       this.render();
+      this.renderVersion();
       Sentence.bind('refresh change', this.proxy(this.render)); 
+      Metadata.bind('refresh change', this.proxy(this.renderVersion)); 
     },
+
+    metadata: undefined,
 
     sentence: new Sentence({
       body:"",
@@ -227,6 +250,7 @@
     elements: {
       "#balloon": "balloon",
       "#balloon p": "quote",
+      "#version-holder": "versionHolder"
     },
 
     saySomething: function() {
@@ -238,7 +262,6 @@
       this.sentence.body = this.selectArticoloDet(adjective1[subject.genere], subject.genere) + " " + adjective1[subject.genere] + " " + subject.nome + " " + verb + " " + this.selectArticoloInd(adjective2[obj.genere], obj.genere) + " " + adjective2[obj.genere] + " " + obj.nome;
       this.sentence.body = this.sentence.body.charAt(0).toUpperCase() + this.sentence.body.slice(1) + ".";
       this.sentence.save();
-
     },
 
     selectArticoloDet: function(parola, genere) {
@@ -284,22 +307,34 @@
       var template = $("#quoteTemplate").tmpl(this.sentence);
       this.balloon.html(template);
       this.balloon.show(500);
+    },
+
+    renderVersion: function() {
+      var template = $("#versionTemplate").tmpl(this.metadata);
+      this.versionHolder.html(template);
     }
   });
 
   jQuery(function($) {
+    var metadata = new Metadata();
+    $.get("metadata.json", function(data) {
+     $.extend(metadata, data); 
+     metadata.save();
+    },"json");
+
     var sentence = new Sentence({
       body: ""
     });
 
     new KonamiCodeController({
-        el: $(".container"),
-        sentence: sentence
+      el: $(".container"),
+      sentence: sentence
     });
 
     return new SlaApp({
-        el: $(".container"),
-        sentence: sentence
+      el: $(".container"),
+      sentence: sentence,
+      metadata: metadata
     });
   });
 </script>
@@ -328,6 +363,9 @@
       <p>"Amàru cu u porcu no 'mmazza, a li travi soi non mpicca sarzizza"</p>
       <img src="img/gazzetta-del-sud.jpg" width="250"/>
     </div> 
+    <div class="span-8 prepend-8 append-8 last footer" >
+      <div id="version-holder"></div> 
+    </div>
 
       <blockquote id="balloon" class="example-obtuse">
       </blockquote>
