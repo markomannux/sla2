@@ -7,8 +7,6 @@ fi
 
 mkdir dist
 
-cp img dist/ -r
-cp blueprint dist/ -r
-cp lib dist/ -r
-cp index.html dist/
-cp metadata.json dist/
+cp public dist/ -r
+cp node_modules dist/ -r
+cp app.js dist/

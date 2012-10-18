@@ -1,0 +1,130 @@
+body {
+  background: #800000;
+}
+.container {
+  position: relative;
+  background: white;
+}
+
+.external {
+  background: #800000;
+}
+
+#header{
+  background: #800000;
+  height: 10px;
+}
+
+.footer {
+  background: #800000;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+}
+
+#logo {
+  background-image: url("../img/logo.png");
+  width: 341px;
+  height: 195px;
+}
+#face {
+  background-image: url("../img/alberto_big.png");
+  width: 828px;
+  height: 497px;
+  float: right;
+}
+#balloon {
+  cursor: pointer;
+  position: absolute;
+  top: 375px;
+  right: 330px;
+  width: 450px;
+}
+#verygood {
+  background-image: url("../img/very_good.png");
+  position: relative;
+  top: 60px;
+  right: -310px;
+  width: 200px;
+  height: 205px;
+}
+
+.action-button {
+  float:right;
+  margin-left: 3px;
+}
+
+div.quote {
+  text-align: center;
+}
+div.quote p {
+  padding: 16px;
+  font-size: 1.2em;
+  min-height: 30px;
+}
+
+blockquote {
+  margin:1em 0;
+}
+blockquote p {
+  margin: 0;
+  text-align: center;
+  font: 1em/1.4 Cambria, Georgia, sans-serif;
+  font-size: 2em;
+}
+/* ============================================================================================================================
+== BLOCKQUOTE WITH OBTUSE TRIANGLE
+ ** ============================================================================================================================ */
+
+  .example-obtuse {
+    position:relative;
+    padding:15px 30px;
+    margin:0;
+    color:#000;
+    background:#f3961c; /* default background for browsers without gradient support */
+    /* css3 */
+    background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
+    background:-moz-linear-gradient(#f9d835, #f3961c);
+    background:-o-linear-gradient(#f9d835, #f3961c);
+    background:linear-gradient(#f9d835, #f3961c);
+    /* Using longhand to avoid inconsistencies between Safari 4 and Chrome 4 */
+    -webkit-border-top-left-radius:25px 50px;
+    -webkit-border-top-right-radius:25px 50px;
+    -webkit-border-bottom-right-radius:25px 50px;
+    -webkit-border-bottom-left-radius:25px 50px;
+    -moz-border-radius:25px / 50px;
+    border-radius:25px / 50px;
+  }
+
+  /* display of quote author (alternatively use a class on the element following the blockquote) */
+  .example-obtuse + p {margin:10px 150px 2em 0; text-align:right; font-style:italic;}
+
+  /* creates the larger triangle */
+  .example-obtuse:before {
+    content:"";
+    position:absolute;
+    top:-30px;
+    right:110px;
+    border-width:30px 50px 0 0;
+    border-style:solid;
+    border-color:transparent #F9D835;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+  }
+
+  /* creates the smaller triangle */
+  .example-obtuse:after {
+    content:"";
+    position:absolute;
+    top:-30px;
+    right:110px; 
+    border-width:30px 20px 0 0;
+    border-style:solid;
+    border-color:transparent #fff;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+  }
+
+
