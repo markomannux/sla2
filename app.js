@@ -6,8 +6,8 @@ var url = require('url');
 var util = require('util');
 
 var file = new(static.Server)('public', {
-  cache: 600,
-    headers: { 'X-Powered-By': 'node-static'}
+  cache: 3600,
+  headers: { 'X-Powered-By': 'node-static'}
 });
 
 
