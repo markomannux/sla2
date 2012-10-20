@@ -38,50 +38,6 @@ var SlaApp = Spine.Controller.sub({
       body:"",
     }),
 
-    nouns: [
-{nome:"astante", genere:"M"},
-{nome:"busillis", genere:"M"},
-{nome:"caratura", genere:"F"},
-{nome:"crepuscolo", genere:"M"},
-{nome:"dileggiatore", genere:"M"},
-{nome:"discente", genere:"M"},
-{nome:"discrasia", genere:"F"},
-{nome:"epigono", genere:"M"},
-{nome:"fattispecie", genere:"F"},
-{nome:"ignominia", genere:"F"},
-{nome:"illazione", genere:"F"},
-{nome:"improperio", genere:"M"},
-{nome:"latore", genere:"M"},
-{nome:"pleonasmo", genere:"M"},
-{nome:"ritrosia", genere:"F"},
-{nome:"sinossi", genere:"F"},
-{nome:"vanesio", genere:"M"},
-{nome:"vituperio", genere:"M"},
-  ],
-
-  verbs: [
-  "depaupera",
-  "dileggia",
-  "esperisce",
-  "ottempera a",
-  "procrastina",
-  "vitupera",
-  "esautora",
-  ],
-
-  adjectives: [
-{M:"desueto", F:"desueta"},
-{M:"esacerbato", F:"esacerbata"},
-{M:"micragnoso", F:"micragnosa"},
-{M:"pleonastico", F:"pleonastica"},
-{M:"protervo", F:"proterva"},
-{M:"querulo", F:"querula"},
-{M:"sesquipedale", F:"sesquipedale"},
-{M:"taumaturgico", F:"taumaturgica"},
-{M:"turpe", F:"turpe"},
-{M:"vanesio", F:"vanesia"},
-  ],
-
   events: {
     "click #balloon": "saySomething",
     "click .action-button": "preventBubbling",
@@ -94,48 +50,11 @@ var SlaApp = Spine.Controller.sub({
   },
 
   saySomething: function() {
-    var subject = this.pickRandom(this.nouns);
-    var verb = this.pickRandom(this.verbs);
-    var obj = this.pickRandom(this.nouns);
-    var adjective1 = this.pickRandom(this.adjectives);
-    var adjective2 = this.pickRandom(this.adjectives);
-    this.sentence.body = this.selectArticoloDet(adjective1[subject.genere], subject.genere) + " " + adjective1[subject.genere] + " " + subject.nome + " " + verb + " " + this.selectArticoloInd(adjective2[obj.genere], obj.genere) + " " + adjective2[obj.genere] + " " + obj.nome;
-    this.sentence.body = this.sentence.body.charAt(0).toUpperCase() + this.sentence.body.slice(1) + ".";
-    this.sentence.save();
-  },
-
-  selectArticoloDet: function(parola, genere) {
-    if (this.startsWithVowel(parola)) {
-      return "l'";
-    } else if (genere == "M") {
-      return "il";
-    } else {
-      return "la";
-    }
-  },
-
-  selectArticoloInd: function(parola, genere) {
-    if (this.startsWithVowel(parola)) {
-      if (genere == "M") {
-        return "un";
-      } else {
-        return "un'";
-      }
-
-    } else if (genere == "M") {
-      return "un";
-    } else {
-      return "una";
-    }
-  },
-
-  startsWithVowel: function(word) {
-    var initial = $.inArray(word.charAt(0), ['a', 'e', 'i', 'o', 'u']);
-    return initial > -1;
-  },
-
-  pickRandom: function(list) {
-    return list[Math.floor(Math.random()*list.length)];
+    _sentence = this.sentence
+    $.get("/generate-sentence", function(data) {
+      _sentence.body = data;
+      _sentence.save();
+    })
   },
 
   preventBubbling: function(event) {
