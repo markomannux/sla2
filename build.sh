@@ -10,3 +10,5 @@ mkdir dist
 cp public dist/ -r
 cp node_modules dist/ -r
 cp app.js dist/
+cp sentence.js dist/
+cp mongodb-connector.js dist/

@@ -1,3 +1,4 @@
+/*
 var nouns = [
   {nome:"astante", genere:"M"},
   {nome:"busillis", genere:"M"},
@@ -41,14 +42,15 @@ var adjectives = [
   {M:"turpe", F:"turpe"},
   {M:"vanesio", F:"vanesia"},
 ];
+*/
 
-function buildSentence() {
-  var subject = pickRandom(nouns);
-  var verb = pickRandom(verbs);
-  var obj = pickRandom(nouns);
-  var adjective1 = pickRandom(adjectives);
-  var adjective2 = pickRandom(adjectives);
-  var body = selectArticoloDet(adjective1[subject.genere], subject.genere) + " " + adjective1[subject.genere] + " " + subject.nome + " " + verb + " " + selectArticoloInd(adjective2[obj.genere], obj.genere) + " " + adjective2[obj.genere] + " " + obj.nome;
+function buildSentence(sentenceParts) {
+  var subject = sentenceParts.subject
+  var verb = sentenceParts.verb
+  var obj = sentenceParts.obj
+  var adjective1 = sentenceParts.adjective1
+  var adjective2 = sentenceParts.adjective2
+  var body = selectArticoloDet(adjective1[subject.genere], subject.genere) + " " + adjective1[subject.genere] + " " + subject.nome + " " + verb.presente + " " + selectArticoloInd(adjective2[obj.genere], obj.genere) + " " + adjective2[obj.genere] + " " + obj.nome;
   body = body.charAt(0).toUpperCase() + body.slice(1) + ".";
   return body;
 };
@@ -81,10 +83,6 @@ function selectArticoloInd(parola, genere) {
 function startsWithVowel(word) {
   var initial = ['a', 'e', 'i', 'o', 'u'].indexOf(word.charAt(0));
   return initial > -1;
-};
-
-function pickRandom(list) {
-  return list[Math.floor(Math.random()*list.length)];
 };
 
 exports.buildSentence = buildSentence;
