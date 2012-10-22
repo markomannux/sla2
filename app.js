@@ -66,6 +66,7 @@ function pickRandomFrom(collectionName, callback) {
         var skip = Math.floor(Math.random()*(count - 1));
         var item = coll.find().limit(-1).skip(skip).nextObject(function(err, item) {
           callback(item);
+          conn.close();
         });
       });
     });
