@@ -19,10 +19,10 @@ var generate_mongo_url = function(obj){
   obj.db = (obj.db || 'test');
 
   if(obj.username && obj.password){
-    return "mongodb://" + obj.username + ":" + obj.password + "@" + obj.hostname + ":" + obj.port + "/" + obj.db;
+    return "mongodb://" + obj.username + ":" + obj.password + "@" + obj.hostname + ":" + obj.port + "/" + obj.db + "?safe=true";
   }
   else{
-    return "mongodb://" + obj.hostname + ":" + obj.port + "/" + obj.db;
+    return "mongodb://" + obj.hostname + ":" + obj.port + "/" + obj.db + "?safe=true";
   }
 }
 
