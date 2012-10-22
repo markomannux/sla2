@@ -1,18 +1,17 @@
 var port = (process.env.VMC_APP_PORT || 3000);
 var host = (process.env.VCAP_APP_HOST || 'localhost');
 var http = require('http');
-var static = require('node-static');
+var statik = require('node-static');
 var url = require('url');
 var util = require('util');
 var sentence = require('./sentence');
 var mongodb_conn = require('./mongodb-connector');
 var mongodb = require('mongodb');
+var events = require('events');
 
-var file = new(static.Server)('public', {
+var file = new(statik.Server)('public', {
   cache: 3600,
-  headers: { 'X-Powered-By': 'node-static'}
 });
-
 
 function route(handle, pathname, req, res) {
   if (typeof handle[pathname] === 'function') {
@@ -38,7 +37,6 @@ function serveFile(req, res) {
   });
 };
 
-var events = require('events');
 var SentenceParts = function() {
   this.partCount = 0;
   this.subject = undefined;
@@ -97,8 +95,33 @@ function generateSentence(req, res) {
   });
 };
 
+function generateSentence_it(req, res) {
+  var sentenceParts = new SentenceParts();
+  sentenceParts.on('all-parts-received', function() {
+    res.write(sentence.buildSentence(sentenceParts, 'albertese'));
+    res.write(sentence.buildSentence(sentenceParts, 'italiano'));
+    res.end();
+  });
+
+  pickRandomFrom('nouns', function(item) {
+    sentenceParts.receivePart('subject', item);
+  });
+  pickRandomFrom('verbs', function(item) {
+    sentenceParts.receivePart('verb', item);
+  });
+  pickRandomFrom('nouns', function(item) {
+    sentenceParts.receivePart('obj', item);
+  });
+  pickRandomFrom('adjectives', function(item) {
+    sentenceParts.receivePart('adjective1', item);
+  });
+  pickRandomFrom('adjectives', function(item) {
+    sentenceParts.receivePart('adjective2', item);
+  });
+};
 var handle = {}
 handle["/generate-sentence"] = generateSentence;
+handle["/generate-sentence/it"] = generateSentence_it;
 
 http.createServer(function (req, res) {
   var pathname = url.parse(req.url).pathname;

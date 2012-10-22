@@ -1,10 +1,14 @@
-function buildSentence(sentenceParts) {
+function buildSentence(sentenceParts, form) {
+  if (!form) {
+    form = 'albertese';
+  }
   var subject = sentenceParts.subject
   var verb = sentenceParts.verb
   var obj = sentenceParts.obj
   var adjective1 = sentenceParts.adjective1
   var adjective2 = sentenceParts.adjective2
-  var body = selectArticoloDet(adjective1[subject.genere], subject.genere) + " " + adjective1[subject.genere] + " " + subject.nome + " " + verb.presente + " " + selectArticoloInd(adjective2[obj.genere], obj.genere) + " " + adjective2[obj.genere] + " " + obj.nome;
+  var body = selectArticoloDet(adjective1[form][subject[form].genere], subject[form].genere) + " " + adjective1[form][subject[form].genere] + " " + subject[form].nome + " " + verb[form].presente + " " + selectArticoloInd(adjective2[form][obj[form].genere], obj[form].genere) + " " + adjective2[form][obj[form].genere] + " " + obj[form].nome;
+
   body = body.charAt(0).toUpperCase() + body.slice(1) + ".";
   return body;
 };
