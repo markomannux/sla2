@@ -61,7 +61,10 @@ function pickRandomFrom(collectionName, callback) {
   mongodb.connect(mongodb_conn.mongourl, function(err, conn) {
     conn.collection(collectionName, function(err, coll) {
       coll.find().count(function(e, count) {
-        var skip = Math.floor(Math.random()*(count - 1));
+        var skip = Math.floor(Math.random()*(count));
+        if (skip == count) {
+          skip--; //per sicurezza
+        }
         var item = coll.find().limit(-1).skip(skip).nextObject(function(err, item) {
           callback(item);
           conn.close();
