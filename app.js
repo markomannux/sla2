@@ -74,32 +74,11 @@ function pickRandomFrom(collectionName, callback) {
 function generateSentence(req, res) {
   var sentenceParts = new SentenceParts();
   sentenceParts.on('all-parts-received', function() {
-    res.write(sentence.buildSentence(sentenceParts));
-    res.end();
-  });
-
-  pickRandomFrom('nouns', function(item) {
-    sentenceParts.receivePart('subject', item);
-  });
-  pickRandomFrom('verbs', function(item) {
-    sentenceParts.receivePart('verb', item);
-  });
-  pickRandomFrom('nouns', function(item) {
-    sentenceParts.receivePart('obj', item);
-  });
-  pickRandomFrom('adjectives', function(item) {
-    sentenceParts.receivePart('adjective1', item);
-  });
-  pickRandomFrom('adjectives', function(item) {
-    sentenceParts.receivePart('adjective2', item);
-  });
-};
-
-function generateSentence_it(req, res) {
-  var sentenceParts = new SentenceParts();
-  sentenceParts.on('all-parts-received', function() {
-    res.write(sentence.buildSentence(sentenceParts, 'albertese'));
-    res.write(sentence.buildSentence(sentenceParts, 'italiano'));
+    var result = {
+      albertese: sentence.buildSentence(sentenceParts, 'albertese'),
+      italiano: sentence.buildSentence(sentenceParts, 'italiano')
+    }
+    res.write(JSON.stringify(result));
     res.end();
   });
 
@@ -121,7 +100,6 @@ function generateSentence_it(req, res) {
 };
 var handle = {}
 handle["/generate-sentence"] = generateSentence;
-handle["/generate-sentence/it"] = generateSentence_it;
 
 http.createServer(function (req, res) {
   var pathname = url.parse(req.url).pathname;

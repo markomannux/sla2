@@ -63,6 +63,15 @@ div.quote p {
   min-height: 30px;
 }
 
+.albertese {
+
+}
+
+.italiano{
+  font-style:italic;
+  color: #6b6759;
+}
+
 blockquote {
   margin:1em 0;
 }

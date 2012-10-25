@@ -1,5 +1,5 @@
 var Sentence = Spine.Model.sub();
-Sentence.configure("Sentence", "body");
+Sentence.configure("Sentence", "albertese", "italiano", "displaying");
 var Metadata= Spine.Model.sub();
 Metadata.configure("Metadata", "version");
 
@@ -26,46 +26,77 @@ var KonamiCodeController = Spine.Controller.sub({
 
 var SlaApp = Spine.Controller.sub({
   init: function() {
-    this.render();
+    this.renderNewBalloon();
     this.renderVersion();
-    Sentence.bind('refresh change', this.proxy(this.render)); 
+    Sentence.bind('create', this.proxy(this.renderNewBalloon)); 
+    Sentence.bind('update', this.proxy(this.renderCurrentBalloon)); 
     Metadata.bind('refresh change', this.proxy(this.renderVersion)); 
   },
 
     metadata: undefined,
 
     sentence: new Sentence({
-      body:"",
+      albertese:"",
+      italiano:"",
     }),
 
   events: {
     "click #balloon": "saySomething",
     "click .action-button": "preventBubbling",
+    "click #italian-button": "toggleLanguage",
   },
 
   elements: {
     "#balloon": "balloon",
-    "#balloon p": "quote",
-    "#version-holder": "versionHolder"
+    "#version-holder": "versionHolder",
   },
 
   saySomething: function() {
-    _sentence = this.sentence
-    $.get("/generate-sentence", function(data) {
-      _sentence.body = data;
-      _sentence.save();
+    var self = this;
+    self.sentence = new Sentence();
+    $.getJSON("/generate-sentence", function(data) {
+      self.sentence.albertese = data.albertese;
+      self.sentence.italiano = data.italiano;
+      self.sentence.displaying = "albertese";
+      self.nextToggle = self.toItaliano; 
+      self.sentence.save();
     })
   },
+
+  toggleLanguage: function(event) {
+    event.preventDefault();
+    this.nextToggle();
+  },
+
+  toItaliano: function() {
+    this.sentence.displaying = "italiano";
+    this.sentence.save();
+    this.nextToggle = this.toAlbertese;
+  },
+
+  toAlbertese: function() {
+    this.sentence.displaying = "albertese";
+    this.sentence.save();
+    this.nextToggle = this.toItaliano;
+  },
+
+  nextToggle: this.toItaliano,
 
   preventBubbling: function(event) {
     event.stopPropagation();
   },
 
-  render: function() {
+  renderNewBalloon: function() {
     this.balloon.hide();
-    var template = $("#quoteTemplate").tmpl(this.sentence);
-    this.balloon.html(template);
+    this.renderCurrentBalloon();
     this.balloon.show(500);
+  },
+
+  renderCurrentBalloon: function() {
+    var template = $("#quoteTemplate").tmpl(this.sentence, {
+      currentQuote: this.sentence[this.sentence.displaying]
+    });
+    this.balloon.html(template);
   },
 
   renderVersion: function() {
