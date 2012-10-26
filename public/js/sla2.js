@@ -16,7 +16,8 @@ var KonamiCodeController = Spine.Controller.sub({
       console.log("check");
       this.keys.push( event.keyCode );
       if ( this.keys.toString().indexOf( this.konami ) >= 0 ){
-        this.sentence.body = "you found a secret phrase!";
+        this.sentence.albertese = "you found a secret phrase!";
+        this.sentence.italiano = "you found a secret phrase!";
         this.sentence.save();
                 this.keys = [];
               }        
@@ -113,7 +114,6 @@ jQuery(function($) {
   },"json");
 
   var sentence = new Sentence({
-    body: ""
   });
 
   new KonamiCodeController({
