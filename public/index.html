@@ -7,6 +7,7 @@
 <script src="lib/jquery-1.7.1.min.js"></script>
 <script src="lib/jquery.tmpl.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="lib/spine.js"></script>
+<script src="lib/list.js"></script>
 <script id="quoteTemplate" type="text/x-jquery-tmpl">
     {{if $item.currentQuote}}
     <p id="quote" class="${displaying}">${$item.currentQuote}</p>
@@ -24,20 +25,28 @@
     ${$item.albertese}
     <p>Try me! Click here!</p>
     {{/if}}
-
 </script>
+
 <script id="versionTemplate" type="text/x-jquery-tmpl">
   {{if version}}
   <p>version ${version}</p>
   {{else}}
   <p>version n/a</p>
   {{/if}}
-
-
 </script>
 
-<script src="js/sla2.js" type="text/javascript">
+<script id="sentencesTemplate" type="text/x-jquery-tmpl">
+  <li class="sentence">
+    <span>${albertese}</span>
+  </li>
 </script>
+
+<script src="js/model/sentence.js" type="text/javascript"></script>
+<script src="js/model/metadata.js" type="text/javascript"></script>
+<script src="js/controllers/konami.js" type="text/javascript"></script>
+<script src="js/controllers/sentencebar.js" type="text/javascript"></script>
+<script src="js/controllers/sla2.js" type="text/javascript"></script>
+<script src="js/application.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -63,7 +72,10 @@ $(document).ready(function(){
       <div id="face"></div>
       <div id="verygood"></div>
     </div> 
-    <hr>
+    <hr/>
+      <ul id="sentences">
+      </ul>
+    <hr/>
     <div class="span-7 colborder quote">
       <p>"We just found the holy grail"</p>
       <img src="img/nytlogo.gif" width="250"/>
