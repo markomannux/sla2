@@ -81,12 +81,29 @@ div.quote p {
 blockquote {
   margin:1em 0;
 }
+
 blockquote p {
   margin: 0;
   text-align: center;
   font: 1em/1.4 Cambria, Georgia, sans-serif;
   font-size: 1.8em;
 }
+
+#history-button {
+  position: relative;
+  top: 55px;
+  right: -47px;
+}
+
+#sentences {
+  list-style-type: none;
+}
+
+.sentence {
+  font: 1em/1.4 Cambria, Georgia, sans-serif;
+  font-size: 1.5em;
+}
+
 .spinner {
 	position: fixed;
 	top: 50%;
