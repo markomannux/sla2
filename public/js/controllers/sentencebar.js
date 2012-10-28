@@ -18,7 +18,7 @@ var Sentencebar = Spine.Controller.sub({
     //TODO handle change selected
     //TODO handle sentence created
     
-    Sentence.bind("refresh change", this.proxy(this.render));
+    Sentence.bind("refresh create", this.proxy(this.render));
   },
 
   render: function() {
