@@ -24,6 +24,9 @@ body {
 
 #logo {
   background-image: url("../img/logo.png");
+  position: relative;
+  top: -200px;
+  right: -40px;
   width: 341px;
   height: 195px;
 }
@@ -32,11 +35,12 @@ body {
   width: 828px;
   height: 497px;
   float: right;
+  margin-bottom: -20px;
 }
 #balloon {
   cursor: pointer;
   position: absolute;
-  top: 375px;
+  top: 365px;
   right: 330px;
   width: 450px;
 }
@@ -54,6 +58,8 @@ body {
   margin-left: 3px;
 }
 
+.right {float:right !important;}
+.left {float:left !important;}
 div.quote {
   text-align: center;
 }
@@ -79,7 +85,7 @@ blockquote p {
   margin: 0;
   text-align: center;
   font: 1em/1.4 Cambria, Georgia, sans-serif;
-  font-size: 2em;
+  font-size: 1.8em;
 }
 .spinner {
 	position: fixed;
@@ -117,6 +123,7 @@ blockquote p {
     -webkit-border-bottom-left-radius:25px 50px;
     -moz-border-radius:25px / 50px;
     border-radius:25px / 50px;
+    border-left: 0;
   }
 
   /* display of quote author (alternatively use a class on the element following the blockquote) */
