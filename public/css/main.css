@@ -89,6 +89,12 @@ blockquote p {
   font-size: 1.8em;
 }
 
+#history-button {
+  position: relative;
+  top: 55px;
+  right: -47px;
+}
+
 #sentences {
   list-style-type: none;
 }

@@ -1,6 +1,7 @@
 var Sentencebar = Spine.Controller.sub({
   elements: {
-    "#sentences": "sentences"
+    "#sentences": "sentences",
+    "#history-button": "button",
   },
 
   template: function(sentences) {
@@ -21,7 +22,10 @@ var Sentencebar = Spine.Controller.sub({
   },
 
   render: function() {
-    var sentences = Sentence.all();
+    var sentences = Sentence.all().reverse();
+    if (sentences) {
+      this.button.show(500);
+    }
     this.list.render(sentences);
   },
 
