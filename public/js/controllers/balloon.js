@@ -9,10 +9,6 @@ var Balloon = Spine.Controller.sub({
     "click #italian-button": "toggleLanguage",
   },
 
-  elements: {
-    "#balloon": "balloon",
-  },
-
   preventBubbling: function(event) {
     event.stopPropagation();
   },
@@ -29,9 +25,9 @@ var Balloon = Spine.Controller.sub({
 
   renderNewBalloon: function(item) {
     console.log("render new balloon");
-    this.balloon.hide();
+    this.el.hide();
     this.renderCurrentBalloon();
-    this.balloon.show(500);
+    this.el.show(500);
   },
 
   renderCurrentBalloon: function() {
