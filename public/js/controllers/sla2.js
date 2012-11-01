@@ -5,8 +5,6 @@ var SlaApp = Spine.Controller.sub({
     Metadata.bind('refresh change', this.proxy(this.renderVersion)); 
   },
 
-  metadata: undefined,
-
   events: {
     "click #balloon": "saySomething",
   },

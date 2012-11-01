@@ -14,9 +14,7 @@ var Balloon = Spine.Controller.sub({
 
   bindSentence: function(sentence) {
     if (sentence) {
-      this.item.unbind("update");
       this.item = sentence;
-      this.item.bind("update", this.proxy(this.renderCurrentBalloon));
       this.nextToggle = this.toItaliano;
     }
     this.renderNewBalloon();
@@ -44,12 +42,14 @@ var Balloon = Spine.Controller.sub({
     this.item.displaying = "italiano";
     this.item.save();
     this.nextToggle = this.toAlbertese;
+    this.renderCurrentBalloon();
   },
 
   toAlbertese: function() {
     this.item.displaying = "albertese";
     this.item.save();
     this.nextToggle = this.toItaliano;
+    this.renderCurrentBalloon();
   },
 
 });

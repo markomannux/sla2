@@ -12,10 +12,10 @@ var History = Spine.Controller.sub({
     //TODO handle change selected
     //TODO handle sentence created
     
-    Sentence.bind("create", this.proxy(this.render));
+    Sentence.bind("create", this.proxy(this.addOne));
   },
 
-  render: function(sentence) {
+  addOne: function(sentence) {
     var historyItem = new HistoryItem({item: sentence});
     var historyItemElement = historyItem.render();
     historyItemElement.hide();
