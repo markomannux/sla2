@@ -26,7 +26,6 @@ var SlaApp = Spine.Controller.sub({
   },
 
   addOne: function(item) {
-    console.log("called addOne");
     this.balloon.bindSentence(item);
   },
 

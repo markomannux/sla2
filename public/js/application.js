@@ -5,7 +5,7 @@ jQuery(function($) {
     metadata.save();
   },"json");
 
-  new Sentencebar({
+  new History({
     el: $(".container"),
   });
 

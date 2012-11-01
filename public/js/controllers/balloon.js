@@ -1,6 +1,5 @@
 var Balloon = Spine.Controller.sub({
   init: function(elements) {
-    console.log("init balloon");
     this.renderNewBalloon();
   },
 
@@ -24,14 +23,12 @@ var Balloon = Spine.Controller.sub({
   },
 
   renderNewBalloon: function(item) {
-    console.log("render new balloon");
     this.el.hide();
     this.renderCurrentBalloon();
     this.el.show(500);
   },
 
   renderCurrentBalloon: function() {
-    console.log("current");
     var template = $("#quoteTemplate").tmpl(this.item, {
       currentQuote: this.item[this.item.displaying]
     });
@@ -39,13 +36,11 @@ var Balloon = Spine.Controller.sub({
   },
 
   toggleLanguage: function(event) {
-    console.log("toggle");
     event.preventDefault();
     this.nextToggle();
   },
 
   toItaliano: function() {
-    console.log("it");
     this.item.displaying = "italiano";
     this.item.save();
     this.nextToggle = this.toAlbertese;
