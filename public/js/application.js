@@ -5,9 +5,11 @@ jQuery(function($) {
     metadata.save();
   },"json");
 
-  new Sentencebar({
+  new History({
     el: $(".container"),
   });
+
+  var balloon = new Balloon({el:$("#balloon"), item: new Sentence()});
 
   new KonamiCodeController({
     el: $(".container"),
@@ -15,6 +17,7 @@ jQuery(function($) {
 
   return new SlaApp({
     el: $(".container"),
+         balloon: balloon,
          metadata: metadata
   });
 });
