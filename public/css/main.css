@@ -31,7 +31,7 @@ body {
   height: 195px;
 }
 #face {
-  background-image: url("../img/alberto_big.png");
+  background-image: url("../img/alberto_big_compressed.jpg");
   width: 828px;
   height: 497px;
   float: right;

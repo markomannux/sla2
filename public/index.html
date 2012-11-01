@@ -14,15 +14,15 @@
 <script id="quoteTemplate" type="text/x-jquery-tmpl">
     {{if $item.currentQuote}}
     <p id="quote" class="${displaying}">${$item.currentQuote}</p>
-    <a href="https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=${encodeURI(albertese)}" id="twitter-button" class="action-button" target="Tweet!!"><img alt="Twitter" title="Twitter" src="img/twitter.png" width="16px"/></a>
+    <a href="https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=${encodeURI(albertese)}" id="twitter-button" class="action-button" target="Tweet!!"><img alt="Twitter" title="Twitter" src="img/twitter_24.png" width="24px"/></a>
 
-    <a href="http://translate.google.it/#it/en/${encodeURI(albertese)}" id="translate-button" class="action-button" target="Translate!!"><img alt="Translate" title="Translate" src="img/translate.png" width="16px"/></a>
+    <a href="http://translate.google.it/#it/en/${encodeURI(albertese)}" id="translate-button" class="action-button" target="Translate!!"><img alt="Translate" title="Translate" src="img/translate_24.png" width="24px"/></a>
 
       {{if displaying == 'albertese'}}
-      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Italian" src="img/italian.png" width="16px"/></a>
+      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Italian" src="img/italian.png" width="24px"/></a>
       {{else}}
         
-      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Albertese" src="img/alberto_icon.png" width="16px"/></a>
+      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Albertese" src="img/alberto_icon.png" width="24px"/></a>
       {{/if}}
     {{else}}
     ${$item.albertese}
