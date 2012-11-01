@@ -15,7 +15,8 @@ var SlaApp = Spine.Controller.sub({
 
   saySomething: function() {
     var sentence = new Sentence();
-    $.getJSON("/generate-sentence", function(data) {
+    var requestId = new Date().getTime();
+    $.getJSON("/generate-sentence", {rid:requestId}, function(data) {
       sentence.albertese = data.albertese;
       sentence.italiano = data.italiano;
       sentence.displaying = "albertese";
