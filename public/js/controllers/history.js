@@ -2,22 +2,21 @@ var History = Spine.Controller.sub({
   elements: {
     "#sentences": "sentences",
     "#history-button": "button",
+    "#clear-history-button": "clearButton",
+    "#history": "history",
+  },
+
+  events: {
+    "click #clear-history-button": "clearHistory",
   },
 
   historySize: 0,
-
-  template: function(sentences) {
-    return($("#sentencesTemplate").tmpl(sentences));
-  },
 
   buttonTemplate: function() {
     return($("#historyButtonTemplate").tmpl({historySize:this.historySize}));
   },
 
   init: function() {
-    //TODO handle change selected
-    //TODO handle sentence created
-    
     Sentence.bind("create", this.proxy(this.addOne));
   },
 
@@ -36,7 +35,15 @@ var History = Spine.Controller.sub({
 
   renderButton: function() {
     this.button.html(this.buttonTemplate());
-  }
+  },
+
+  clearHistory: function() {
+    this.history.collapse('hide');
+    this.sentences.html('');
+    this.historySize = 0;
+    this.renderButton();
+    this.button.hide(500);
+  },
 
 });
 

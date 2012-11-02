@@ -40,14 +40,18 @@
 
 <script id="sentencesTemplate" type="text/x-jquery-tmpl">
   <li class="sentence">
+    <i class="icon-play"></i>
     <span>${albertese}</span>
   </li>
 </script>
 
 <script id="historyButtonTemplate" type="text/x-jquery-tmpl">
-  <button type="button" class="btn history-button" data-toggle="collapse" data-target="#history"  title="History">
+  <button type="button" class="btn history-button" data-toggle="collapse" data-target="#history" title="History">
     <i class="icon-th-list"></i>
     <span class="badge badge-inverse">${historySize}</span>
+  </button>
+  <button id="clear-history-button" type="button" class="btn" title="Clear history">
+    <i class="icon-trash"></i>
   </button>
 </script>
 
@@ -81,13 +85,18 @@ $(document).ready(function(){
           <div id="face"></div>
           <div id="verygood"></div>
           <div id="logo"></div>
-          <div id="history-button" style="display:none;"></div>
         </div> 
       </div> 
       <hr/>
 
       <div class="row">
-        <div class="span10 offset2">
+        <div class="span4 offset1">
+          <div id="history-button" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span10 offset1">
           <div id="history" class="accordion-body collapse">
             <div class="history-box">
               <ul id="sentences">

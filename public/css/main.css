@@ -89,15 +89,10 @@ blockquote p {
   font-size: 1.8em;
 }
 
-.history-button {
-  position: relative;
-  top: 59px;
-  right: -20px;
-}
-
 .history-box {
+  margin-top: 8px;
 	overflow: auto;
-	max-height: 400px;
+	max-height: 250px;
 
 	background:
 		/* Shadow covers */
