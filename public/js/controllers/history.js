@@ -16,7 +16,7 @@ var History = Spine.Controller.sub({
   },
 
   addOne: function(sentence) {
-    var historyItem = new HistoryItem({item: sentence});
+    var historyItem = new HistoryItem({item: sentence, balloon:this.balloon});
     var historyItemElement = historyItem.render();
     historyItemElement.hide();
     this.sentences.prepend(historyItemElement);
@@ -27,6 +27,10 @@ var History = Spine.Controller.sub({
 });
 
 var HistoryItem = Spine.Controller.sub({
+  events: {
+    "click": "click"
+  },
+
   init: function() {
     if (!this.item) throw "@item required";
     this.item.bind("update", this.proxy(this.render));
@@ -42,4 +46,9 @@ var HistoryItem = Spine.Controller.sub({
     this.el.html(this.template(this.item));
     return this.el;
   },
+
+  click: function() {
+    if (!this.balloon) throw "@balloon required";
+    this.balloon.bindSentence(this.item);
+  }
 });
