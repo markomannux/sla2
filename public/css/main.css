@@ -89,10 +89,10 @@ blockquote p {
   font-size: 1.8em;
 }
 
-#history-button {
+.history-button {
   position: relative;
-  top: 55px;
-  right: -47px;
+  top: 59px;
+  right: -20px;
 }
 
 .history-box {

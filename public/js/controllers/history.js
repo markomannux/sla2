@@ -4,8 +4,14 @@ var History = Spine.Controller.sub({
     "#history-button": "button",
   },
 
+  historySize: 0,
+
   template: function(sentences) {
     return($("#sentencesTemplate").tmpl(sentences));
+  },
+
+  buttonTemplate: function() {
+    return($("#historyButtonTemplate").tmpl({historySize:this.historySize}));
   },
 
   init: function() {
@@ -21,8 +27,16 @@ var History = Spine.Controller.sub({
     historyItemElement.hide();
     this.sentences.prepend(historyItemElement);
     historyItemElement.show(500);
-    this.button.show(500);
+    this.historySize++;
+    this.renderButton();
+    if (this.historySize > 0) {
+      this.button.show(500);
+    }
   },
+
+  renderButton: function() {
+    this.button.html(this.buttonTemplate());
+  }
 
 });
 
