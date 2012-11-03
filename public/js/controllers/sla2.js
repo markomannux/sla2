@@ -1,7 +1,6 @@
 var SlaApp = Spine.Controller.sub({
   init: function() {
     this.renderVersion();
-    Sentence.bind('create', this.proxy(this.addOne)); 
     Metadata.bind('refresh change', this.proxy(this.renderVersion)); 
   },
 
@@ -19,13 +18,8 @@ var SlaApp = Spine.Controller.sub({
     $.getJSON("/generate-sentence", {rid:requestId}, function(data) {
       sentence.albertese = data.albertese;
       sentence.italiano = data.italiano;
-      sentence.displaying = "albertese";
       sentence.save();
     })
-  },
-
-  addOne: function(item) {
-    this.balloon.bindSentence(item);
   },
 
   renderVersion: function() {
