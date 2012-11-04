@@ -41,13 +41,15 @@ var History = Spine.Controller.sub({
   },
 
   clearHistory: function() {
-    if (this.historyVisible) {
-      this.history.collapse('hide');
+    if (confirm("Really clear history?")) {
+      if (this.historyVisible) {
+        this.history.collapse('hide');
+      }
+      this.sentences.html('');
+      this.historySize = 0;
+      this.renderButton();
+      this.button.hide(500);
     }
-    this.sentences.html('');
-    this.historySize = 0;
-    this.renderButton();
-    this.button.hide(500);
   },
 
   setHistoryVisible: function() {
