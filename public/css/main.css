@@ -41,7 +41,7 @@ body {
   cursor: pointer;
   position: absolute;
   top: 365px;
-  right: 330px;
+  right: 277px;
   width: 450px;
 }
 #verygood {
@@ -87,6 +87,12 @@ blockquote p {
   text-align: center;
   font: 1em/1.4 Cambria, Georgia, sans-serif;
   font-size: 1.8em;
+}
+
+#history-button {
+  position: relative;
+  right: -21px;
+  top: 58px;
 }
 
 .history-box {

@@ -8,9 +8,12 @@ var History = Spine.Controller.sub({
 
   events: {
     "click #clear-history-button": "clearHistory",
+    "hidden #history": "setHistoryHidden",
+    "shown #history": "setHistoryVisible",
   },
 
   historySize: 0,
+  historyVisible: false,
 
   buttonTemplate: function() {
     return($("#historyButtonTemplate").tmpl({historySize:this.historySize}));
@@ -38,13 +41,22 @@ var History = Spine.Controller.sub({
   },
 
   clearHistory: function() {
-    this.history.collapse('hide');
+    if (this.historyVisible) {
+      this.history.collapse('hide');
+    }
     this.sentences.html('');
     this.historySize = 0;
     this.renderButton();
     this.button.hide(500);
   },
 
+  setHistoryVisible: function() {
+    this.historyVisible = true;
+  },
+
+  setHistoryHidden : function() {
+    this.historyVisible = false;
+  },
 });
 
 var HistoryItem = Spine.Controller.sub({
