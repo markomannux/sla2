@@ -1,6 +1,7 @@
 var Balloon = Spine.Controller.sub({
   init: function(elements) {
     this.renderNewBalloon();
+    Sentence.bind('create', this.proxy(this.bindSentence)); 
   },
 
   events: {
@@ -26,9 +27,13 @@ var Balloon = Spine.Controller.sub({
     this.el.show(500);
   },
 
-  renderCurrentBalloon: function() {
+  renderCurrentBalloon: function(form) {
+    if(!form) {
+      form = "albertese"
+    }
     var template = $("#quoteTemplate").tmpl(this.item, {
-      currentQuote: this.item[this.item.displaying]
+      currentQuote: this.item[form],
+      displaying: form
     });
     this.el.html(template);
   },
@@ -39,17 +44,15 @@ var Balloon = Spine.Controller.sub({
   },
 
   toItaliano: function() {
-    this.item.displaying = "italiano";
     this.item.save();
     this.nextToggle = this.toAlbertese;
-    this.renderCurrentBalloon();
+    this.renderCurrentBalloon("italiano");
   },
 
   toAlbertese: function() {
-    this.item.displaying = "albertese";
     this.item.save();
     this.nextToggle = this.toItaliano;
-    this.renderCurrentBalloon();
+    this.renderCurrentBalloon("albertese");
   },
 
 });

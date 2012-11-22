@@ -31,7 +31,7 @@ body {
   height: 195px;
 }
 #face {
-  background-image: url("../img/alberto_big.png");
+  background-image: url("../img/alberto_big_compressed.jpg");
   width: 828px;
   height: 497px;
   float: right;
@@ -41,7 +41,7 @@ body {
   cursor: pointer;
   position: absolute;
   top: 365px;
-  right: 330px;
+  right: 277px;
   width: 450px;
 }
 #verygood {
@@ -91,8 +91,29 @@ blockquote p {
 
 #history-button {
   position: relative;
-  top: 55px;
-  right: -47px;
+  right: -21px;
+  top: 58px;
+}
+
+.history-box {
+  margin-top: 8px;
+	overflow: auto;
+	max-height: 250px;
+
+	background:
+		/* Shadow covers */
+		-webkit-linear-gradient(white 30%, rgba(255,255,255,0)),
+		-webkit-linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+		
+		/* Shadows */
+		-webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		-webkit-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background-repeat: no-repeat;
+	background-color: white;
+	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+	
+	/* Opera doesn't support this in the shorthand */
+	background-attachment: local, local, scroll, scroll;
 }
 
 #sentences {
@@ -102,6 +123,11 @@ blockquote p {
 .sentence {
   font: 1em/1.4 Cambria, Georgia, sans-serif;
   font-size: 1.5em;
+}
+
+.sentence :hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
 
 .spinner {

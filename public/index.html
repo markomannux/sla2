@@ -13,16 +13,16 @@
 <script src="lib/list.js"></script>
 <script id="quoteTemplate" type="text/x-jquery-tmpl">
     {{if $item.currentQuote}}
-    <p id="quote" class="${displaying}">${$item.currentQuote}</p>
-    <a href="https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=${encodeURI(albertese)}" id="twitter-button" class="action-button" target="Tweet!!"><img alt="Twitter" title="Twitter" src="img/twitter.png" width="16px"/></a>
+    <p id="quote" class="${$item.displaying}">${$item.currentQuote}</p>
+    <a href="https://twitter.com/intent/tweet?button_hashtag=AlbertoDixit&text=${encodeURI(albertese)}" id="twitter-button" class="action-button" target="Tweet!!"><img alt="Twitter" title="Twitter" src="img/twitter_24.png" width="24px"/></a>
 
-    <a href="http://translate.google.it/#it/en/${encodeURI(albertese)}" id="translate-button" class="action-button" target="Translate!!"><img alt="Translate" title="Translate" src="img/translate.png" width="16px"/></a>
+    <a href="http://translate.google.it/#it/en/${encodeURI(albertese)}" id="translate-button" class="action-button" target="Translate!!"><img alt="Translate" title="Translate" src="img/translate_24.png" width="24px"/></a>
 
-      {{if displaying == 'albertese'}}
-      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Italian" src="img/italian.png" width="16px"/></a>
+      {{if $item.displaying == 'albertese'}}
+      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Italian" src="img/italian.png" width="24px"/></a>
       {{else}}
         
-      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Albertese" src="img/alberto_icon.png" width="16px"/></a>
+      <a href="#" id="italian-button" class="action-button left" target="What the hell..."><img alt="Italian" title="Albertese" src="img/alberto_icon.png" width="24px"/></a>
       {{/if}}
     {{else}}
     ${$item.albertese}
@@ -40,8 +40,19 @@
 
 <script id="sentencesTemplate" type="text/x-jquery-tmpl">
   <li class="sentence">
+    <i class="icon-play"></i>
     <span>${albertese}</span>
   </li>
+</script>
+
+<script id="historyButtonTemplate" type="text/x-jquery-tmpl">
+  <button type="button" class="btn history-button" data-toggle="collapse" data-target="#history" title="History">
+    <i class="icon-th-list"></i>
+    <span class="badge badge-inverse">${historySize}</span>
+  </button>
+  <button id="clear-history-button" type="button" class="btn" title="Clear history">
+    <i class="icon-trash"></i>
+  </button>
 </script>
 
 <script src="js/model/sentence.js" type="text/javascript"></script>
@@ -74,19 +85,19 @@ $(document).ready(function(){
           <div id="face"></div>
           <div id="verygood"></div>
           <div id="logo"></div>
-          <button id="history-button" type="button" class="btn" data-toggle="collapse" data-target="#history" style="display:none;" title="History">
-            <i class="icon-th-list"></i>
-          </button>
+            <div id="history-button" class="btn-group" style="display:none;">
+            </div>
         </div> 
       </div> 
       <hr/>
 
       <div class="row">
-        <div class="span10 offset2">
+        <div class="span10 offset1">
           <div id="history" class="accordion-body collapse">
-            <ul id="sentences">
-            </ul>
-            <hr/>
+            <div class="history-box">
+              <ul id="sentences">
+              </ul>
+            </div>
           </div>
         </div>
       </div>

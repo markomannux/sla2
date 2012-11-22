@@ -5,19 +5,20 @@ jQuery(function($) {
     metadata.save();
   },"json");
 
-  new History({
-    el: $(".container"),
-  });
-
   var balloon = new Balloon({el:$("#balloon"), item: new Sentence()});
 
   new KonamiCodeController({
     el: $(".container"),
   });
 
+  new History({
+    el: $(".container"),
+     balloon: balloon,
+  });
+
   return new SlaApp({
     el: $(".container"),
-         balloon: balloon,
-         metadata: metadata
+     balloon: balloon,
+     metadata: metadata
   });
 });
